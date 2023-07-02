@@ -1,78 +1,84 @@
 package mandatoryHomeWork.week1.day3;
 
 import org.junit.Test;
-
+//https://leetcode.com/problems/power-of-two/description/
 public class LC_231_PowerOfTwo {
-	
+
+	@Test
+	public void positive() {
+		int num = 128;
+		System.out.println(twoPower2(num));
+	}
+
+	@Test
+	public void negative() {
+		int num = 0;
+		System.out.println(twoPower2(num));
+
+	}
+
+	@Test
+	public void edge() {
+		int num = -8;
+		System.out.println(twoPower2(num));
+
+	}
+
+	// not working for even non powers
+	private boolean twoPower(int num) {
+		int val = 1, i = 0;
+		if (num == 1) {
+			return true;
+		}
+
+		else if (num % 2 == 0) {
+
+			while (val != num) {
+				val = val * 2;
+				i++;
+			}
+			System.out.println("2 power " + i);
+			return true;
+		}
+
+		return false;
+
+	}
+
 	/*
-	 * Question here !!
-	 * https://leetcode.com/problems/power-of-two/
-	 * Given an integer n, return true if it is a power of two. Otherwise, return false.
-An integer n is a power of two, if there exists an integer x such that n == 2x.
+	 * Check whether the given num is negative since the input is integer
+	 * 	If negative then multiply with -1
+	 * Check if the given number is 1. If yes return true .since 2^0 =1
+	 * Check if given number is odd . If yes return false
+	 * Check if given number is even. If yes verify the remainder of number continuously till number is less than 1
+	 * 	If remainder is equal to 1 in any iteration , return false
+	 * 		else return true.
 	 */
-
-	@Test // +ve
-	public void example1() {
-		int n=4096;
-		System.out.println(isPowerOfTwo(n));
+	//TimeComplexity --> O(n)
+	public boolean twoPower2(int num) {
+		int val = 1, i = 0;
+		if (num < 0) { //to handle negative values
+			num = num * -1;
+		}
+		if (num == 1) {
+			return true;
+		} 
 		
-
+		else if (num % 2 != 0) {
+			return false;
+		} 
+		//For even u can get modulus as 1 when n=1;
+		else if (num % 2 == 0) {
+			while (num > 1) {
+				val = num % 2;
+				if (val == 1) {
+					return false;
+				}
+				num = num / 2;
+			}
+			
+		}
+		return true;
 	}
-
-	@Test // edge //2^0=1
-	public void example2() {
-		int n=1;
-		System.out.println(isPowerOfTwo(n));
-	}
-
-	@Test // negative
-	public void example3() {
-		int n=300;
-		System.out.println(isPowerOfTwo(n));
-	}
-	
-	@Test // negative
-	public void example4() {
-		int n=0;
-		System.out.println(isPowerOfTwo(n));
-	}
-
-	/* 
-	 * Brute force !!
-	 * Psuedo code here:
-	 * if n==0 return false
-	 * if n==1 return true
-	 * if n%2 !=0 return false
-	 * return isPowerofTwo(n/2) until n becomes 1 or n%2!=0
-	 * 
-	 * TC=O(log n)
-	 * SC=O(1)
-	 */
-
-		public boolean isPowerOfTwo(int n) {
-	        // Check if n is 0, in which case it cannot be a power of 2, so return false
-	        //System.out.println("n value is:"+n);
-			if (n == 0) {
-	            return false;
-	        }
-	        
-	        // Check if n is 1, in which case it is a power of 2, so return true
-	        if (n == 1) {
-	            return true;
-	        }
-	        
-	        // Check if n is odd, in which case it cannot be a power of 2, so return false
-	        if (n % 2 != 0) {
-	            return false;
-	        }
-	        
-	        // If n is even, recursively call the function with n/2 until n becomes 1 or an odd number
-	        return isPowerOfTwo(n / 2);
-	    }
-		
-		
 
 }
-
-
-

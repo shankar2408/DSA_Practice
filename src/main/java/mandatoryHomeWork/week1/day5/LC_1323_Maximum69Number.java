@@ -1,91 +1,50 @@
 package mandatoryHomeWork.week1.day5;
 
 import org.junit.Test;
-
+//https://leetcode.com/problems/maximum-69-number/
 public class LC_1323_Maximum69Number {
-	
-	//https://leetcode.com/problems/maximum-69-number/
-	
 	@Test
-	public void TC1() {
+	public void positive() {
 		int num = 9669;
-		System.out.println(maximum69Number(num));
-		System.out.println(max69Number(num));
+		Maximum69(num);
+	}
+
+	@Test
+	public void negative() {
+		int num = 9996;
+		Maximum69(num);
+	}
+
+	@Test
+	public void edge() {
+		int num = 66666;
+		Maximum69(num);
 
 	}
-	
-	@Test
-	public void TC2() {
-		int num = 9996;
-		System.out.println(maximum69Number(num));
-		System.out.println(max69Number(num));	}
 
-	@Test
-	public void TC3() {
-		int num = 9999;
-		System.out.println(maximum69Number(num));
-		System.out.println(max69Number(num));	}
-	
-	@Test
-	public void TC4() {
-		int num = 6669;
-		System.out.println(maximum69Number(num));
-		System.out.println(max69Number(num));	}
-
-	/*
-	 * Pseudocode
-	 * convert num to string
-	 * convert it to char array
-	 * use for loop for iteration from 0 to length
-	 * if ch[i]=='6', change it to 9 and break
-	 * return in int datate
+	/* Converting to String
+	 * Convert the integer into String Loop through the length of the string Check
+	 * the each and every character in string and change the value of 1st 6 to 9
 	 * 
-	 * TC-O(n)
-	 * SC-O(1)
 	 */
+	//Time complexity ---> O(n)
 	
-	public int maximum69Number (int num) {
+	private void Maximum69(int num) {
+		String val = String.valueOf(num);
+		String str = "";
+		char tar = '\u0000';
+		int count = 0;
+		for (int i = 0; i < val.length(); i++) {
+			//9669
+			tar = val.charAt(i);
+			if (val.charAt(i) == '6' && count < 1) {
+				tar = '9';
+				count++;
 
-        String s = String.valueOf(num);
-        char[] ch = s.toCharArray();
-        
-        for(int i = 0 ; i<ch.length;i++) {
-        	if(ch[i]=='6') {
-        		ch[i]='9';
-        		break;
-        	}
-        }
-        
-       return Integer.parseInt(String.valueOf(ch));
-       
-       
-    }
-	
-public int max69Number (int num) {
-		
-		int max = num ;
-		int prevTotal = 0;
-		int mul = 1;
-		
-		while(num>9) {
-			int digits = num%10;
-			int quotient = num/10;
-			prevTotal += digits*mul;
-			if(digits == 6) {
-				int temp = (quotient*10*mul) + (prevTotal+ (3*mul));
-				max = Math.max(max, temp);
 			}
-			num = quotient;
-			mul = mul*10;
+			str = str + tar;
 		}
-		
-		if(num == 6) {
-			int temp = (9*mul) + (prevTotal);
-			max = Math.max(max, temp);
-		}
-			
-		return max;
-       
-       
-    }
+		System.out.println(Integer.parseInt(str));
+
+	}
 }

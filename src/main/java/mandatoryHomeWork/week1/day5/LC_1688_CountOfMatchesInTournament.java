@@ -1,49 +1,51 @@
 package mandatoryHomeWork.week1.day5;
 
 import org.junit.Test;
-
+//https://leetcode.com/problems/count-of-matches-in-tournament/
 public class LC_1688_CountOfMatchesInTournament {
-	
-	/*https://leetcode.com/problems/count-of-matches-in-tournament/ */
+
 	@Test
-	public void testcase1(){
-	    int n=7;
-	    System.out.println(numberOfMatches(n));
+	public void positive() {
+		int num = 14;
+		noOfMatches(num);
 	}
 
 	@Test
-	public void testcase2(){
-	    int n=14;
-	    System.out.println(numberOfMatches(n));
+	public void negative() {
+		int num = 0;
+		noOfMatches(num);
 	}
 
+	@Test
+	public void edge() {
+		int num = 7;
+		noOfMatches(num);
+
+	}
 	/*
-	* 
-	Pseudocode:
-	declare int in testdata and pass to method
-	if int n is even should divide n by 2 and store the value in variable sum for matches played and again divide by 2 for teams advance store it in n variable
-	if int n is odd should divide n-1 by 2 and store the value in variable n for matches played and again divide (n-1)/2 +1 for teams advance store it in sum variable
-	based on teams advances should make the matches and store the result until matches comes to 1 while(num<1)
+	 * Loop the input number till num is greater than 1 Validate is num is even or
+	 * not if yes ---> no.of.matches=num/2; and num=no.of matches if no --->
+	 * no.of.matches=num-1/2; and num=no.of matches+1 add the no.of matches from
+	 * each iteration as a total number of matches. Print the total number of
+	 * matches
+	 */
+	// Time Complexity ---> O(n/2)
 
-	then return sum of the matches
-	
-	TC-O(n)
-	SC-O(1)
-	*
-	*
-	*/
-	
-	//Time complexity= O(n)
-	public int numberOfMatches(int n) {
-	int sum=0;
+	private void noOfMatches(int num) {
+		int matchCount;
+		int totalMatch = 0;
+		while (num > 1) {
+			if (num % 2 == 0) {
+				matchCount = num / 2;
+				num = matchCount;
+			} else {
+				matchCount = (num - 1) / 2;
+				num = matchCount + 1;
+			}
+			totalMatch = totalMatch + matchCount;// 7+3+2
 
-	while(n>1){
-	   sum=sum+(n/2); 
-	   n=(n/2)+(n%2);
+		}
+		System.out.println(totalMatch);
+
 	}
-	return sum;
-	        
-	    }
-	}
-
-
+}

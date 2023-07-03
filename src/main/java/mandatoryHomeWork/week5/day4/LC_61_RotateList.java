@@ -1,56 +1,97 @@
 package mandatoryHomeWork.week5.day4;
-//package week5.Day4;
-//
-//public class LC_61_RotateList {
-//	
-//	@Test
-//	public void TC1() {
-//		int[] arr = {1,2,3};
-//		int left = 2000000000;
-//		ListNode h = SingleLinkedList.create(arr);
-//		ListNode ans = rotateRight(h, left);
-//		
-//		while(ans!=null) {
-//			System.out.println(ans.val);
-//			ans = ans.next;		
-//		}
-//
-//}
-//	
-//	public ListNode rotateRight(ListNode head, int k) {
-//        int size = sizeOfNode(head);
-//        
-//        k = k%size;
-//        return recurse(head, k);
-//
-//    }
-//	
-//	public ListNode recurse(ListNode head, int k) {
-//        if(head == null || k == 0 || head.next == null) return head;
-//        ListNode temp = head.next;
-//        ListNode prev = head;
-//
-//        while(temp.next != null){
-//            prev = prev.next;
-//            temp = temp.next;
-//        }
-//
-//        temp.next = head;
-//        prev.next = null;
-//        head = temp;
-//
-//        return rotateRight(head, k-1);
-//
-//    }
-//	
-//	public int sizeOfNode(ListNode root){
-//        int size = 0;
-//
-//        while(root != null){
-//            root = root.next;
-//            size++;
-//        }
-//
-//        return size;
-//    }
-//}
+
+import org.junit.Test;
+
+import mandatoryHomeWork.week5.linkedListImpl.MyLinkedList;
+import mandatoryHomeWork.week5.linkedListImpl.MyLinkedList.Node;
+
+public class LC_61_RotateList extends MyLinkedList{
+	@Test
+	public void addNode1() {
+
+		Node newNode = new Node(1);
+		newNode.next=new Node(2);
+		newNode.next.next=new Node(3);
+		newNode.next.next.next=new Node(4);
+		newNode.next.next.next.next=new Node(5);
+		
+		int k = 2;
+			
+		displayNode(rotateList(newNode,k));
+		
+	}
+	
+
+	@Test
+	public void addNode2() {
+
+		Node newNode = new Node(0);
+		newNode.next=new Node(1);
+		newNode.next.next=new Node(2);
+		
+		int k = 4;
+		
+		displayNode(rotateList(newNode,k));
+		
+		
+	}
+	
+	@Test
+	public void addNode3() {
+
+		Node newNode = new Node();
+		
+		int k = 1;
+		
+		displayNode(rotateList(newNode,k));
+		
+		
+	}
+	
+	
+	
+	/*
+	 * Initiate the count variable as 0
+	 * Find the head node
+	 * loop till the count<k
+	 * Set head node as temp and find the tail node and tail before node using temp.next.next!=null
+	 * set tail.next=head;
+	 * head=tail;
+	 * t1.next=null;
+	 * count++;
+	 * 
+	 */
+	
+	//Time Complexity ---> O(n*m)
+	//Space Complexity --> O(n)
+	private Node rotateList(Node newNode, int k) {
+		MyLinkedList ll=new MyLinkedList();
+		int count=0;
+		Node head=newNode;
+		//to handle null node
+		if(ll.size(head)==1) {
+			//return newNode;
+			return head;
+		}
+		else if(head==null) {
+			//return newNode;
+			return head;
+		}
+		else{
+		while(count<k) {
+			Node temp=head;
+			while(temp.next.next!=null) {
+				temp=temp.next;
+			}
+				Node tail=temp.next;
+				tail.next=head;
+				head=tail;
+				temp.next=null;
+				count++;
+			
+		}
+		}
+		
+		return newNode;
+	}
+}

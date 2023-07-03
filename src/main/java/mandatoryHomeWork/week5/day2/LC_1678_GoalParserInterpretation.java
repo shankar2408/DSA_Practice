@@ -1,68 +1,62 @@
 package mandatoryHomeWork.week5.day2;
 
 import org.junit.Test;
-import java.util.*;
 
 public class LC_1678_GoalParserInterpretation {
-	/*
-	 * Question here !!
-	 * 
-	 */
 
-	@Test // +ve
+	@Test
 	public void example1() {
 		String s="G()(al)";
-		System.out.println(interpret(s));
+		
+		System.out.println(goalInterpretation(s));
 	}
-
-	@Test // edge
+	
+	@Test
 	public void example2() {
 		String s="G()()()()(al)";
-		System.out.println(interpret(s));
+		
+		System.out.println(goalInterpretation(s));
 	}
-
-	@Test // negative
+	
+	@Test
 	public void example3() {
 		String s="(al)G(al)()()G";
-		System.out.println(interpret(s));
+		
+		System.out.println(goalInterpretation(s));
 	}
 
-
-	 public String interpret(String command) {
-	     Stack<Character> stack=new Stack<>(); 
-	     String str="";
-	     for(int i=0; i<command.length(); i++) {
-	    	 if(command.charAt(i)=='G') {
-	    		 stack.add(command.charAt(i));
-	    	 }else if(command.charAt(i)=='(' && command.charAt(i+1)==')') {
-	    		stack.add('o'); 
-	    	 }else if(command.charAt(i)=='(' && command.charAt(i+1)=='a') {
-	    		 stack.add('a');
-	    		 stack.add('l');
-	    	 }
-	    	 
-	     }
-		 while(!stack.isEmpty()) {
-			 str=stack.pop()+str;
-		 }
-	     
-		 return str;
-	    }
-	 
-	 public String interpret1(String command) {
-	        StringBuilder sb = new StringBuilder("");
-	        for(int i=0;i<command.length();i++){
-	            if(command.charAt(i)=='G'){
-	                sb.append("G");
-	            }
-	            if(command.charAt(i)=='(' && command.charAt(i+1)==')'){
-	                sb.append("o");
-	            }
-	            if(command.charAt(i)=='(' && command.charAt(i+1)=='a'){
-	                sb.append("al");
-	            }
-	        }
-	        
-	        return sb.toString();
-	    }
-	}
+	/*
+	 * loop till i is lesser than s.length
+	 * check if the ith char is 'G' --> If yes, add it in a new string
+	 * else check if ith char is '('-->If yes, increment i
+	 * -->  check whether next value is ')' --> If yes, add 'O' to new string
+	 * -->  else add 'al' to the new string and increment i+2
+	 * return new string 
+	 * 
+	 */
+	//Time Complexity ---> O(n)
+	//Space Complexity --->O(n)
+	private String goalInterpretation(String s) {
+		String out="";
+		for(int i=0;i<s.length();i++) {
+			if(s.charAt(i)=='G') {
+				out=out+'G';
+			}
+			else if(s.charAt(i)=='(') {
+				i++;
+				if(s.charAt(i)==')') {
+					out=out+'o';
+				}
+				else {
+					out=out+"al";
+					i+=2;
+					}
+				}
+				
+				}
+		return out;
+		}
+		
+		
+	
+}

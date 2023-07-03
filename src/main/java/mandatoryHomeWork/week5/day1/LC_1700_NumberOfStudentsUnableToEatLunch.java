@@ -1,101 +1,151 @@
 package mandatoryHomeWork.week5.day1;
 
-import org.junit.Test;
 import java.util.*;
+import java.util.List;
+import mandatoryHomeWork.week5.queueImplementation.Queue;
+import mandatoryHomeWork.week5.queueImplementation.Queue.Node;
+import mandatoryHomeWork.week5.queueImplementation.*;
 
-public class LC_1700_NumberOfStudentsUnableToEatLunch {
-	/*
-	 * Question here !!
-	 * 
-	 */
+import org.junit.Test;
 
-	@Test // +ve
-	public void example1() {
-		int[] students = {1,1,0,0};
-		int[] sandwiches = {0,1,0,1};
+public class LC_1700_NumberOfStudentsUnableToEatLunch{
 
-		System.out.println(countStudents(students,sandwiches));
+	@Test
+	public void positive() {
+		int[] st = {1,1,0,0};
+		int[] sa = {0,1,0,1};	
+		
+	System.out.println(studentsCount(st,sa));
+	System.out.println("*********");
+	System.out.println(studentsCountusingQueue(st,sa));
+	System.out.println("Next case");
 	}
-
-	@Test // edge
-	public void example2() {
-		int[] students = {1,1,1,0,0,1};
-		int[] sandwiches = {1,0,0,0,1,1};
-
-		System.out.println(countStudents(students,sandwiches));
-	}
-
-
-	 public int countStudents(int[] students, int[] sandwiches) {
-         Stack<Integer> stack=new Stack<>();
-       Deque<Integer> dq=new LinkedList<>();
-       // -Pushing Sandwiches in Stack
-       for (int i = sandwiches.length-1; i>=0; i--) {
-          stack.push(sandwiches[i]);
-       }
-       // - Created Deque to add from both side
-       for (int i = 0; i < students.length; i++) {
-           dq.add(students[i]);
-       }
-       int eaten=0;
-//To make sure that we dont get stuck in infinte Loop
-       int count= 0;
-       while (!stack.isEmpty()){
-//If equal then Remove those elements from stack and queue
-           if (Objects.equals(stack.peek(), dq.peek())){
-               count=0;
-               eaten++;
-               stack.pop();
-               dq.poll();
-           }else {
-//Else remove the first element and move it to last
-               count++;
-               int temp = dq.peekFirst();
-               dq.pollFirst();
-               dq.addLast(temp);
-           }
-//If this condition hits that means we have checked for all and no more comparisons are required
-           if (count==dq.size()){
-               break;
-           }
-       }
-       return students.length-eaten;
-   }
-	 
-	 public int countStudents1(int[] students, int[] sandwiches) 
-	 {//T-> O(n^2) S->O(n)
-		Queue<Integer> line=new LinkedList<Integer>();
-		Stack<Integer> menu=new Stack<Integer>();
-
-		for(int i: students)//pushing the students into the queue according to the probleem statement
-	        {
-		     line.offer(i);
-		}
-
-		for(int i=sandwiches.length-1;i>=0;i--)//pushing in reverse order it order to acess the top at first 
-	        {
-		    menu.push(sandwiches[i]);
-		}
-
-		int counter=line.size()*menu.size();//maximum possible iteration possible 
-		while(counter-->0)
-	        {
-			if((!menu.isEmpty())&&line.peek()==menu.peek())//if the student has got the sandwitch he wants 
-	                {
-			    line.poll();
-			    menu.pop();
-			}
-			else//if the student has not got the sandwitch he wants 
-	                {
-	                   if(line.size()>0)//waiting for the desired sandwich in the line 
-	                   {
-			      line.offer(line.remove());//removing from the front of the queue and adding at the rear of the queue 
-	                   }
-	                   else
-	                      return 0;//if line size is zero means every student has got the sandwitch, no one is left to consume sandwitch so returning zero 
-			}
-	        }
-		return line.size();
-	 }//Please do vote me, It helps a lot
 	
+	@Test
+	public void negative() {
+		int[] st = {1,1,1,0,0,1};
+		int[] sa = {1,0,0,0,1,1};
+		System.out.println(studentsCount(st,sa));
+		System.out.println("*********");
+		System.out.println(studentsCountusingQueue(st,sa));
+		System.out.println("Next case");
+	}
+	
+	@Test
+	public void edge() {
+		int[] st = {1};
+		int[] sa = {0};	
+		System.out.println(studentsCount(st,sa));
+		System.out.println("*********");
+		System.out.println(studentsCountusingQueue(st,sa));
+		System.out.println("Next case");
+	}
+	
+	@Test
+	public void edge1() {
+		int[] st = {};
+		int[] sa = {};	
+		System.out.println(studentsCount(st,sa));
+		System.out.println("*********");
+		System.out.println(studentsCountusingQueue(st,sa));
+		System.out.println("Next case");
+	}
+	
+	/*
+	 * convert the given array into list
+	 * use 2 pointer left and right
+	 * loop till left pointer is less than student list
+	 * use counter to check when no of mismatch is equal to the no of students
+	 * --> If yes return the size of students
+	 * --> else if left value == right value remove left and right value
+	 * --> else remove the 1st value and add it in the last index
+	 */
+	//Time Complexity --> O(n)
+	//Space Complexity --> O(n)
+	private int studentsCount(int[] st, int[] sa) {
+		
+		int left=0;
+		int right=0;
+		int count=0;
+		int temp;
+		
+		List<Integer> stList = new ArrayList<Integer>();
+		for (int i : st) {
+			stList.add(i);
+		}
+		//System.out.println(stList);
+		List<Integer> saList = new ArrayList<Integer>();
+		for (int j : sa) {
+			saList.add(j);
+		}
+		//System.out.println(stList.get(0));
+		//System.out.println(saList.get(0));
+		while(left<stList.size()) {
+			
+			if(count==stList.size()) {
+				return stList.size();
+			}
+			
+			else if(stList.get(left)==saList.get(right)) {
+				stList.remove(left);
+				saList.remove(right);
+				count=0;
+			}
+			else {
+				temp=stList.get(left);
+				stList.remove(left);
+				stList.add(temp);
+				count++;
+			}
+			
+		}
+		return 0;
+		
+	}
+	
+	/*
+	 * Add the student values in queue 
+	 * loop till head node !=tail node
+	 * if student[i]==sandwich[j] 
+	 * --> if yes, remove the head element by assigning head as head.next and remove the sandwich element
+	 * els if student[i]!=sandwich[j]
+	 * --> if yes, increment the counter and add head node to tail
+	 */
+	public int studentsCountusingQueue(int[] student, int[] sandwich) {
+		Queue queue=new Queue();
+		//Add the student values in queue
+		for(int i: student) {
+		queue.enqueue(i);
+		}
+		//System.out.println(queue.size);
+		//assign starting queue point as head
+		//assign end queue point as tail
+		Node head = queue.start;
+		Node tail = queue.end;
+		int j=0;
+		int count=0;
+		Node temp;
+		while(head !=tail ) {
+			if(count==queue.size()) {
+				return count;
+			}
+			//if yes, remove the head element by assigning head as head.next and remove the sandwich element
+			else if(head.number==sandwich[j]) {
+				head=head.next;
+				count=0;
+				j++;
+			}
+			else {
+				count++;
+				temp=head;
+				head=head.next;
+				tail.next=temp;
+				tail=temp;
+			}
+		}
+		
+		return 0;
+		
+		
+	}
 }

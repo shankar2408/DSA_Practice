@@ -3,43 +3,48 @@ package mandatoryHomeWork.week5.day5;
 import org.junit.Test;
 
 public class LC_1221_SplitAStringInBalancedStrings {
-	/*
-	 * Question here !!
-	 * https://leetcode.com/problems/split-a-string-in-balanced-strings/description/
-	 */
 
-	@Test // +ve
-	public void example1() {
+	@Test
+	public void positive() {
 		String s = "RLRRLLRLRL";
-		System.out.println(balancedStringSplit(s));
 	}
 
-	@Test // edge
-	public void example2() {
+	@Test
+	public void positive1() {
 		String s = "RLRRRLLRLL";
-		System.out.println(balancedStringSplit(s));
 	}
 
-	@Test // negative
-	public void example3() {
+	@Test
+	public void edge1() {
 		String s = "LLLLRRRR";
-		System.out.println(balancedStringSplit(s));
 	}
-
 	
-	 public int balancedStringSplit(String s) {
-		 int sum=0,ans=0;
-	        for(int i=0;i<s.length();i++){
-	            if(s.charAt(i)=='L'){
-	                sum++;
-	            }else{
-	                sum--;
-	            }
-	            //System.out.println("Sum:"+sum);
-	            if(sum==0){
-	                ans++;
-	            }
-	        }
-	        return ans;
-	    }
-	}
+	/*
+	 * Initialize rCount, lCount and out
+	 * loop till the length of the string
+	 * if the character is 'R' then increment rCount;
+	 * else increment lCount;
+	 * if rCount==lCount --> increment o
+	 */
+	public int balancedStringSplit(String s) {
+        int lCount=0;
+        int rCount=0;
+        int out=0;
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            switch(ch){
+                case 'R':
+                rCount++;
+                break;
+                default: 
+                lCount++;
+            }
+            if(rCount==lCount){
+                out++;
+                lCount=0;
+                rCount=0;
+            }
+        }
+        return out;
+    }
+}

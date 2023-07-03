@@ -3,70 +3,74 @@ package mandatoryHomeWork.week5.day2;
 import org.junit.Test;
 
 public class LC_392_IsSubsequence {
-	/*
-	 * Question here !! https://leetcode.com/problems/is-subsequence/description/
-	 */
 
-//	@Test // +ve
-//	public void example1() {
-//		String s1 = "abc";
-//		String s2 = "ahbgdc";
-//		System.out.println(twoPointer(s1, s2));
-//	}
-//	
-//	@Test // edge
-//	public void example2() {
-//		String s1 = "axc";
-//		String s2 = "ahbgdc";
-//		System.out.println(twoPointer(s1, s2));
-//	}
-
-	@Test // edge
-	public void example3() {
-		String s1 = "ab";
-		String s2 = "baab";
-		System.out.println(twoPointer(s1, s2));
+	@Test
+	public void positive() {
+		String s="abc";
+		String t ="ahbgdc";
+		System.out.println(isSubsequence(s,t));
 	}
-
-	public boolean isSubsequence(String s, String t) {
-		int index = 0;
-		int min = Integer.MIN_VALUE;
-		boolean flag = false;
-		if (s.length() == 0) {
-			return true;
-		}
-
-		for (int i = 0; i < s.length(); i++) {
-			char c = s.charAt(i);
-			flag = false;
-			for (int j = 0; j < t.length(); j++) {
-				if (c == t.charAt(j)) {
-					index = j;
-					flag = true;
-					if (min < index) {
-						min = index;
-					} else {
-						return false;
-					}
+	@Test
+	public void edge1() {
+		String s="";
+		String t="";
+		System.out.println(isSubsequence(s,t));
+	}
+	@Test
+	public void edge2() {
+		String s="a";
+		String t="a";
+		System.out.println(isSubsequence(s,t));
+	}
+	@Test
+	public void negative1() {
+		String s="axc";
+		String t="ahbgdc";
+		System.out.println(isSubsequence(s,t));
+	}
+	@Test
+	public void negative2() {
+		String s="x";
+		String t="y";
+		System.out.println(isSubsequence(s,t));
+	}
+	
+	//2 pointer algorithm
+	/*
+	 * use left pointer for s and right pointer t
+	 * loop till the right pointer is less than t.length
+	 * --> if left value==right value 
+	 * -----> increment the counter 
+	 * ---------> check if the count == size of s --> If yes, return true;
+	 * -----> increment left and right pointer
+	 * --> else increment right pointer
+	 */
+	
+	//Time complexity --> O(n)
+	//Space Complexity --> O(1)
+	private boolean isSubsequence(String s, String t) {
+		
+		 int left=0;
+			int right=0;
+			int count=0;
+			if((s.length()==0 && t.length()==0) || s.length()==0) return true;
+			else if( t.length()==0) return false;
+			else {
+			while(right<t.length()) {
+				if(s.charAt(left)==t.charAt(right)) {
+					count++;
+					if(count==s.length()) return true;
+					
+					left++;
+					right++;
+				}
+				else {
+					right++;
 				}
 			}
-			if (!flag) {
-				return false;
 			}
-
-		}
-
-		return flag;
-	}
-
-	public boolean twoPointer(String s, String t) {
-		int i = 0, j = 0;
-		while (i < s.length() && j < t.length()) {
-			if (s.charAt(i) == t.charAt(j)) {
-				i++;
-			}
-			j++;
-		}
-		return i == s.length();
+			return false;
+		
+		
 	}
 }

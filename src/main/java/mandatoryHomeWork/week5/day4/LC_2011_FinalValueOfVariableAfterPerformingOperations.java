@@ -1,56 +1,39 @@
 package mandatoryHomeWork.week5.day4;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 import org.junit.Test;
 
 public class LC_2011_FinalValueOfVariableAfterPerformingOperations {
-	/*
-	 * Question here !!
-	 * https://leetcode.com/problems/final-value-of-variable-after-performing-operations/description/
-	 */
 
-	@Test // +ve
+	@Test
 	public void example1() {
 		String[] operations = {"--X","X++","X++"};
-		System.out.println(finalValueAfterOperations(operations));
+		finalValue(operations);
 	}
-
-	@Test // edge
+	
+	@Test
 	public void example2() {
 		String[] operations = {"++X","++X","X++"};
-		System.out.println(finalValueAfterOperations(operations));
+		finalValue(operations);
 	}
-
-	@Test // negative
+	
+	@Test
 	public void example3() {
 		String[] operations = {"X++","++X","--X","X--"};
-		System.out.println(finalValueAfterOperations(operations));
+		finalValue(operations);
+	}
+	
+	private void finalValue(String[] operations) {
+		int x=0;
+		for(String i:operations) {
+			if(i.contains("-")) {
+				x+=-1;
+			}
+			else {
+				x+=1;
+			}
+		}
+		System.out.println(x);
+		
 	}
 
-	
-
-	public int finalValueAfterOperations(String[] operations) {
-        int x=0;
-        for(int i=0; i<operations.length; i++){
-            if(operations[i].equals("++X") || operations[i].equals("X++")){
-                x++;
-            }
-            if(operations[i].equals("--X") || operations[i].equals("X--")){
-                x--;
-            }
-        }
-        return x;
-    }
-	
-	public int finalValueAfterOperations1(String[] operations) {
-        int x = 0;
-        for(String s : operations)
-            if(s.charAt(1) == '-') x--;
-            else x++;
-        return x;
-    }
 }

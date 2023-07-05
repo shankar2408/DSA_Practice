@@ -60,11 +60,11 @@ public class SeleniumScenarioAssignment_Jira {
 		
 		driver.get("https://comparecheck.atlassian.net/");
 		
-		driver.findElement(By.name("username")).sendKeys("bharathimanohar0696@gmail.com");
+		driver.findElement(By.name("username")).sendKeys("shankarec24@gmail.com");
 		
 		driver.findElement(By.id("login-submit")).click();
 		
-		driver.findElement(By.id("password")).sendKeys("Bharathi@1996");
+		driver.findElement(By.id("password")).sendKeys("shan2408");
 		
 		driver.findElement(By.xpath("//span[text()='Log in']")).click();
 		

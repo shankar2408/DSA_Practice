@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class test {
+public class HC_sherlockAndAnagrams {
 	
 	 public static int sherlockAndAnagrams(String s) {
 		    // Write your code here

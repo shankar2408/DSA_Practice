@@ -1,0 +1,16 @@
+Test scenarios for round-trip flight booking:
+		1.Verify that a user can search for round-trip flights by providing the departure and destination airports, departure date, and return date.
+		2.Ensure that the search results display relevant round-trip flight options, including departure and return flights.
+		3.Verify that the displayed flight options include essential details such as airline name, departure time, arrival time, duration, and price for both departure and return flights.
+		4.Test the ability to select a specific round-trip flight option from the search results.
+		5.Verify that the selected round-trip flight is added to the booking summary, showing details such as flight numbers, departure and arrival times, and total price.
+		6.Test the functionality to modify the selected round-trip flight by changing the departure or return date or selecting different flight options.
+		7.Ensure that the system calculates the correct total price for the round-trip booking, considering the prices of both departure and return flights.
+		8.Verify that the user can provide passenger details (such as names, contact information, and passenger type) for the round-trip booking.
+		9.Test the validation of passenger information fields to ensure that they are correctly filled out with the required details.
+		10.Verify that the user can proceed to the payment step after providing all necessary details for the round-trip booking.
+		11.Test the payment process for the round-trip booking, ensuring that it is secure and successfully completes the transaction.
+		12.Verify that the user receives a confirmation email or booking reference number after successfully completing the round-trip flight booking.
+		13.Test the ability to cancel or modify the round-trip booking and ensure that it updates the booking details and prices accordingly.
+		14.Verify that the system provides appropriate error messages or validation prompts when any required information is missing or entered incorrectly during the round-trip booking process.
+		15.Test the system's responsiveness and performance when handling a high volume of round-trip flight bookings simultaneously.

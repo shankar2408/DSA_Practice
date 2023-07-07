@@ -1,50 +1,59 @@
 package mandatoryHomeWork.week4.day4;
-//package week4.Day4;
-//
-//public class LC_206_ReverseLinkedList {
-//
-//	@Test
-//	public void TC1() {
-//		int[] arr = {1, 1, 2, 1};
-//		ListNode h = SingleLinkedList.create(arr);
-//		ListNode ans = createNode(h);
-//		while(ans!=null) {
-//			System.out.println(ans.val);
-//			ans = ans.next;		
-//		}
-//}
-//
-//	private ListNode reverseLL(ListNode head) {
-//		
-//		if(head == null) return null;
-//		
-//		ListNode prev = head;
-//        head = head.next;
-//		prev.next = null;
-//		
-//		while(head != null) {
-//			ListNode temp = head.next;
-//			head.next = prev;
-//			prev = head;
-//			head = temp;
-//		}
-//		
-//		return prev;
-//	}
-//	
-//	public ListNode createNode(ListNode head) {
-//		ListNode temp = new ListNode(head.val);
-//		ListNode prev = temp;
-//		head = head.next;
-//		
-//		while(head != null) {
-//			ListNode nm = new ListNode(head.val);
-//			temp.next = nm;
-//			temp = temp.next;
-//			head = head.next;
-//		}
-//		
-//		return prev;
-//		
-//	}
-//}
+
+import org.junit.Test;
+
+import  mandatoryHomeWork.week5.linkedListImpl.MyLinkedList;
+import  mandatoryHomeWork.week5.linkedListImpl.MyLinkedList.Node;
+
+public class LC_206_ReverseLinkedList extends MyLinkedList {
+
+	@Test
+	public void addNode1() {
+
+		Node newNode = new Node(1);
+		newNode.next = new Node(2);
+		newNode.next.next = new Node(3);
+		newNode.next.next.next = new Node(4);
+		newNode.next.next.next.next = new Node(5);
+		Node reverse = reverseList(newNode);
+		display(reverse);
+
+	}
+
+	public Node reverseList(Node head) {
+		Node revNode=null;
+		int size=1;
+		if (head == null) {
+			return null;
+		} else if (size(head) == 1) {
+			return head;
+		}
+
+		else {
+			Node temp = head;
+			Node tail=null;
+			while (temp.next != null) {
+				if (revNode==null) {
+					revNode = new Node();
+					revNode.data = temp.data;
+					revNode.next = null;
+					tail = revNode;
+					//size++;
+					
+				} else {
+					revNode = new Node();
+					revNode.data = temp.data;
+					revNode.next = tail;
+					tail = revNode;
+				}
+				temp=temp.next;
+				
+				revNode = new Node();
+				revNode.data = temp.data;
+				revNode.next = tail;
+			}
+		}
+		return revNode;
+
+	}
+}

@@ -1,54 +1,57 @@
 package mandatoryHomeWork.week4.day3;
 
 import org.junit.Test;
-import java.util.*;
+import mandatoryHomeWork.week5.stackImplementation.Stack;
 
 public class LC_1047_RemoveAllAdjacentDuplicatesInString {
-	/*
-	 * Question here !!
-	 * https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/
-	 * description/
-	 */
 
-	@Test // +ve
+	@Test
 	public void example1() {
-		String s = "abbaca";
-		System.out.println(removeDuplicates(s));
+		String s="abbaca";
+		removeAdjDuplicates(s);
 	}
-
-	@Test // edge
+	
+	@Test
 	public void example2() {
-		String s = "azxxzy";
-		System.out.println(removeDuplicates(s));
+		String s="azxxzy";
+		removeAdjDuplicates(s);
 	}
 	
+	@Test
+	public void example3() {
+		String s="aaaaaaa";
+		removeAdjDuplicates(s);
+	}
 	/*
-	 * pseudocode:
-	 * convert string to char
-	 * declare output string
-	 * use for loop for iteration
-	 * if not stack is empty and current and prev value is same, pop the stack
-	 * else push the value to stack
-	 * use while loop if not stack it empty, use pop to get value and store it in the output
-	 * return output string
+	 * loop till the length of the string
+	 * Check whether the character is available in the stack by peek. 
+	 * If yes, remove the top element using pop.
+	 * else, push it into the queue.
+	 * 
 	 */
-
-	
-	public String removeDuplicates(String s) {
-		Stack<Character> stack = new Stack<>();
-		String output = "";
-		for (int i = 0; i < s.length(); i++) {
-			if (!stack.isEmpty() && s.charAt(i)== stack.peek()) {
-				stack.pop();
-			}else {
-				stack.push(s.charAt(i));
+	//Time Complexity --> O(n)
+	//Space Complexity --> O(1)
+	private void removeAdjDuplicates(String s) {
+		Stack st=new Stack();
+		for(int i=0;i<s.length();i++) {
+			
+			if(st.peek()!=null && st.peek()==s.charAt(i)) {
+				st.pop();
 			}
-
+			
+			else st.push(s.charAt(i));
+			
 		}
-		while (!stack.isEmpty()) {
-			output = stack.pop()+output;
+		
+		int stackSize=st.size();
+		
+		s="";
+		for(int j=0;j<stackSize;j++) {
+			
+			s=st.pop()+s;
+			
 		}
-
-		return output;
+		System.out.println(s);
+		
 	}
 }

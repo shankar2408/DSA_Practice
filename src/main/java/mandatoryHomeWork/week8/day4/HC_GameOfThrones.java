@@ -9,19 +9,19 @@ public class HC_GameOfThrones {
 	@Test
 	public void example1() {
 		String s="abcddcba";
-		gameOfThrones(s);
+		System.out.println(gameOfThrones(s));
 	}
 	
 	@Test
 	public void example2() {
 		String s="aaabbbb";
-		gameOfThrones(s);
+		System.out.println(gameOfThrones(s));
 	}
 	
 	@Test
 	public void example3() {
 		String s="cdefghmnopqrstuvw";
-		gameOfThrones(s);
+		System.out.println(gameOfThrones(s));
 	}
 	
 	public static String gameOfThrones(String s) {

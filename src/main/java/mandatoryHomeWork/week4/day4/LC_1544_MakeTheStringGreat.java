@@ -1,61 +1,84 @@
 package mandatoryHomeWork.week4.day4;
-
+import mandatoryHomeWork.week5.stackImplementation.Stack;
 import org.junit.Test;
-import java.util.*;
 
-public class LC_1544_MakeTheStringGreat {
-	/*
-	 * Question here !!
-	 * https://leetcode.com/problems/make-the-string-great/description/
-	 */
+public class LC_1544_MakeTheStringGreat extends Stack{
 
-	@Test
+	//@Test
 	public void example1() {
-		String s = "LeEeetcode";
-		System.out.println(makeGood(s));
-
+		String s="leEeetcode";
+		greatString(s);
 	}
-
-	@Test
+	
+	//@Test
 	public void example2() {
-		String s = "abBAcC";
-		System.out.println(makeGood(s));
-
+		String s="abBAcC";
+		greatString(s);
 	}
-
-	@Test
+	
+	//@Test
 	public void example3() {
-		String s = "Pp";
-		System.out.println(makeGood(s));
-
-
+		String s="aaaaaaa";
+		greatString(s);
 	}
 	
-	/*
-	 * pseudocode:
-	 * create character stack
-	 * use for loop for iteration
-	 * if (!stack.isEmpty() && Math.abs(stack.peek() - s.charAt(i)) == 32),stack.pop
-	 * else stack.push
-	 * use string builder to append the stack stored char and return it after converting to string
-	 */
+
+	//@Test
+	public void example4() {
+		String s="bBCcdD";
+		greatString(s);
+	}
 	
 
-    public String makeGood(String s) {
-            Stack<Character> stack = new Stack<>();
-            for(int i=0; i<s.length(); i++){
-                if (!stack.isEmpty() && Math.abs(stack.peek() - s.charAt(i)) == 32) {          
-                  stack.pop();
-                }
-                else
-                    stack.push(s.charAt(i));
-                
-            }
-            
-            StringBuilder ans = new StringBuilder();
-            for(char c:stack){
-                ans.append(c);
-            }
-            return ans.toString();
-        }
-    }
+	//@Test
+	public void example5() {
+		String s="bBfghdDd";
+		greatString(s);
+	}
+	
+	@Test
+	public void example6() {
+		String s="jOlrqDxpiGzIHUznyXvfJTXnQwrnChZNVnAdyVgKeGwNfUijuc";
+		          //jOlrqDxpiGzIHUznyXvfJTXnQwrnChZNVnAdyVgKeGwNfUijuc
+		greatString(s);
+	}
+	
+	private void greatString(String s) {
+		
+		Stack st=new Stack();
+		
+		for(int i=0;i<s.length();i++) {
+			
+			
+			if(st.top==0) {
+				st.push(s.charAt(i));
+				//System.out.println(st.top);
+			}
+			
+			else if((Character.isUpperCase(s.charAt(i)) && Character.isLowerCase(st.peek())) || (Character.isLowerCase(s.charAt(i)) && Character.isUpperCase(st.peek()))) {
+				
+				char ch1=s.charAt(i);
+				char ch2=st.peek();
+				
+				if(Character.toUpperCase(ch1)==Character.toUpperCase(ch2)) {
+					st.pop();
+				}
+				else {
+					st.push(s.charAt(i));
+				}
+			}
+			else {
+				st.push(s.charAt(i));
+			}
+			
+		}
+		s="";
+		while(st.top!=0) {
+		
+		s=st.pop()+s;
+		System.out.println(s);
+		}
+		
+	}
+
+}

@@ -1,63 +1,119 @@
 package mandatoryHomeWork.week4.day5;
-//package week4.Day5;
-//
-//public class LC_234_PalindromeLinkedList {
-//
-//	@Test
-//	public void TC1() {
-//		int[] arr = { 1, 1, 2, 1};
-//		ListNode h = SingleLinkedList.create(arr);
-//		boolean ans = PalindromeLL(h);
-//		System.out.println(ans);
-//	}
-//
-//	private boolean PalindromeLL(ListNode head) {
-//		
-//		if(head==null) return true;
-//		ListNode h1 = createNode(head);
-//		ListNode h2 = reverseLL(head);
-//		
-//		while(h2 != null) {
-//			if(h2.val != h1.val) return false;
-//			h2 = h2.next;
-//			h1 = h1.next;
-//		}
-//
-//		return true;
-//	}
-//
-//	private ListNode reverseLL(ListNode head) {
-//
-//		if (head == null)
-//			return null;
-//
-//		ListNode prev = head;
-//		head = head.next;
-//		prev.next = null;
-//
-//		while (head != null) {
-//			ListNode temp = head.next;
-//			head.next = prev;
-//			prev = head;
-//			head = temp;
-//		}
-//
-//		return prev;
-//	}
-//	
-//	public ListNode createNode(ListNode head) {
-//		ListNode temp = new ListNode(head.val);
-//		ListNode prev = temp;
-//		head = head.next;
-//		
-//		while(head != null) {
-//			ListNode nm = new ListNode(head.val);
-//			temp.next = nm;
-//			temp = temp.next;
-//			head = head.next;
-//		}
-//		
-//		return prev;
-//		
-//	}
-//} 
+
+import org.junit.Test;
+
+import  mandatoryHomeWork.week5.linkedListImpl.MyLinkedList;
+import  mandatoryHomeWork.week5.linkedListImpl.MyLinkedList.Node;
+
+public class LC_234_PalindromeLinkedList extends MyLinkedList{
+
+	@Test
+	public void addNode1() {
+
+		Node newNode = new Node(1);
+		newNode.next=new Node(2);
+		newNode.next.next=new Node(2);
+		newNode.next.next.next=new Node(1);
+		
+		System.out.println(palindromeCheck(newNode));
+	}
+
+	@Test
+	public void addNode2() {
+
+		Node newNode = new Node(1);
+		newNode.next=new Node(2);
+		
+		
+		System.out.println(palindromeCheck(newNode));
+	}
+	
+	@Test
+	public void addNode3() {
+
+		Node newNode = new Node(0);
+		newNode.next=new Node(0);
+		
+		
+		System.out.println(palindromeCheck(newNode));
+	}
+	
+	@Test
+	public void addNode4() {
+
+		Node newNode = new Node(0);
+		
+		System.out.println(palindromeCheck(newNode));
+	}
+	private boolean palindromeCheck(Node newNode) {
+		Node head;
+		Node tail=null;
+		Node temp;
+		
+		head=newNode;
+		//when we have one element in node
+		if(head.next==null) return true;
+		
+		//assigning head and tail for 1st time
+		 temp=head;
+		while(temp.next.next!=null) {
+			temp=temp.next;
+		}
+		tail=temp.next;
+		//count++;
+		
+		if(head.data!=tail.data) return false;
+		
+		//other elements
+		//temp=head;
+		while(head.next!=tail && head==tail) {
+			head=head.next;
+			
+			while(temp.next.next!=tail) {
+				temp=temp.next;
+			}
+			tail=temp.next;
+			if(head.data!=tail.data) return false;
+		}
+			
+		
+		return true;
+		
+	}
+	
+	private boolean palindromeCheck1(Node newNode) {
+		Node head;
+		Node tail=null;
+		Node temp;
+		
+		head=newNode;
+		//when we have one element in node
+		if(head.next==null) return true;
+		
+		//assigning head and tail for 1st time
+		 temp=head;
+		while(temp.next.next!=null) {
+			temp=temp.next;
+		}
+		tail=temp.next;
+		//count++;
+		
+		if(head.data!=tail.data) return false;
+		
+		//other elements
+		//temp=head;
+		while(head.next!=tail && head==tail) {
+			head=head.next;
+			
+			while(temp.next.next!=tail) {
+				temp=temp.next;
+			}
+			tail=temp.next;
+			if(head.data!=tail.data) return false;
+		}
+			
+		
+		return true;
+		
+	}
+}

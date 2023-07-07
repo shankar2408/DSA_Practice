@@ -10,7 +10,7 @@ public class HC_CaesarCipher1 {
 	public void example1() {
 		String s="middle-Outz";
 		int k=2;
-		caesarCipher1(s,k);
+		System.out.println(caesarCipher1(s,k));
 	}
 	public static String caesarCipher1(String s, int k) {
     String output="";

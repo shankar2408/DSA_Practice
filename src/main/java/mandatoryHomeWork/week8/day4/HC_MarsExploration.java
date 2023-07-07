@@ -9,32 +9,36 @@ public class HC_MarsExploration {
 	@Test
 	public void example1() {
 		String s="SOSSPSSQSSOR";
-		marsExploration(s);
+		System.out.println(marsExploration(s));
 	}
 	
 	@Test
 	public void example2() {
 		String s="SOSSOT";
-		marsExploration(s);
+		System.out.println(marsExploration(s));
 	}
 	
 	@Test
 	public void example3() {
 		String s="SOSSOSSOS";
-		marsExploration(s);
+		System.out.println(marsExploration(s));
 	}
 	
 	public static int marsExploration(String s) {
-   int size=s.length();
-        int count=0;
-        
-        for(int i=0;i<size;i++){
-            if(s.charAt(i)=='S' || s.charAt(i)=='O'){
-                count++;
-            }
-        }
-        
-        return size-count;
+		int len = s.length()/3;
+	    String b = "";
+	    while(len>0){
+	        b+= "SOS";
+	        len--;
+	    }
+	     int count = 0;
+	     
+	     for(int i = 0 ; i<s.length();i++){
+	         if(s.charAt(i)!=b.charAt(i)) 
+	        	 count++;
+	         
+	     }
+	      return count;
+	    }
 
-    }
-}
+	}

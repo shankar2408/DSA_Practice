@@ -2,11 +2,12 @@ package mandatoryHomeWork.week5.day1;
 
 import java.util.*;
 import java.util.List;
-import mandatoryHomeWork.week5.queueImplementation.Queue;
-import mandatoryHomeWork.week5.queueImplementation.Queue.Node;
-import mandatoryHomeWork.week5.queueImplementation.*;
 
 import org.junit.Test;
+
+import mandatoryHomeWork.week5.queueImplementation.*;
+import mandatoryHomeWork.week5.queueImplementation.Queue;
+import mandatoryHomeWork.week5.queueImplementation.Queue.Node;
 
 public class LC_1700_NumberOfStudentsUnableToEatLunch{
 
